@@ -4,7 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const settingSwagger = require("./swagger/swagger");
-const { heroLogger } = require("./loggers/logger");
+const { heroLogger, testLogger } = require("./loggers/logger");
 
 const app = Express();
 const PORT = process.env.PORT;
@@ -15,8 +15,7 @@ app.use(cors());
 app.use("/swagger", settingSwagger.serve, settingSwagger.setup);
 
 app.get("/", (req, res) => {
-  console.log("sdfsdfsdf");
-
+  testLogger.info("test입니다");
   res.send({ message: "tests" });
 });
 
