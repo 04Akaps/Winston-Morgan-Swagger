@@ -46,6 +46,14 @@ const testLogger = createLogger({
       level: "info",
     }),
   ],
+  transports: [
+    new winstonDaily({
+      filename: "test-error.log",
+      datePattern: "YYYY-MM-DD",
+      dirname: logDir + "/error",
+      level: "error",
+    }),
+  ],
 });
 
 testLogger.add(
@@ -65,19 +73,5 @@ heroLogger.add(
     ),
   })
 );
-
-// heroLogger.stream = {
-//   // morgan wiston 설정
-//   write: (message) => {
-//     logger.info(message);
-//   },
-// };
-
-// testLogger.stream = {
-//   // morgan wiston 설정
-//   write: (message) => {
-//     logger.info(message);
-//   },
-// };
 
 module.exports = { heroLogger, testLogger };

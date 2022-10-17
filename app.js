@@ -4,7 +4,8 @@ const cors = require("cors");
 require("dotenv").config();
 
 const settingSwagger = require("./swagger/swagger");
-const { heroLogger, testLogger } = require("./loggers/logger");
+
+const loggerTest = require("./router/loggerTest");
 
 const app = Express();
 const PORT = process.env.PORT;
@@ -14,10 +15,7 @@ app.use(cors());
 // http://localhost:8080/swagger/ 접속시 정보가 뜬다.
 app.use("/swagger", settingSwagger.serve, settingSwagger.setup);
 
-app.get("/", (req, res) => {
-  testLogger.info("test입니다");
-  res.send({ message: "tests" });
-});
+app.use("/loggerTest", loggerTest);
 
 app.use((req, res, next) => {
   next(createError(404));
