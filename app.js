@@ -1,15 +1,17 @@
 const createError = require("http-errors");
 const Express = require("express");
 const cors = require("cors");
+const morgan = require("morgan");
 require("dotenv").config();
 
 const settingSwagger = require("./swagger/swagger");
-
 const loggerTest = require("./router/loggerTest");
 const SwaggerTest = require("./router/SwaggerTest");
+
 const app = Express();
 const PORT = process.env.PORT;
 
+app.use(morgan("dev"));
 app.use(cors());
 app.use(Express.json());
 
